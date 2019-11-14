@@ -26,9 +26,6 @@ public class GestionBD {
 
     private static Connection Conexion;
 
-    
-    
-    
     public void conecta() {
 
         try {
@@ -36,7 +33,6 @@ public class GestionBD {
             Conexion = DriverManager.getConnection("jdbc:mysql://201.238.207.58:3306/" + db_name, user, pass);
             System.out.println("Se ha iniciado la conexión con el servidor de forma exitosa");
 
-           
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex + "error1");
         } catch (SQLException ex) {
@@ -44,18 +40,12 @@ public class GestionBD {
         }
     }
 
-    
-    
-    
-    
-    
-    
     public void closeConnection() {
         try {
             Conexion.close();
             System.out.println("Se ha finalizado la conexión con el servidor");
         } catch (SQLException ex) {
-           Logger.getLogger(GestionBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -68,7 +58,7 @@ public class GestionBD {
             JOptionPane.showMessageDialog(null, "Se ha creado la base de tabla " + name + " de forma exitosa");
             Statement st = Conexion.createStatement();
             st.executeUpdate(Query);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(GestionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
