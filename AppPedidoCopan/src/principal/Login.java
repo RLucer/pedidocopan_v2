@@ -15,7 +15,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);    //centra formulario
+       setLocationRelativeTo(null);    //centra formulario
         this.setResizable(false);       //desactiva el boton maximizar
      
     }
