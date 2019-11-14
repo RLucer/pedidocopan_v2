@@ -29,6 +29,10 @@ public class Agendamiento extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jDayChooser1 = new com.toedter.calendar.JDayChooser();
+        jSpinField1 = new com.toedter.components.JSpinField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,21 +80,53 @@ public class Agendamiento extends javax.swing.JFrame {
     dateChooserCombo1.setLocale(new java.util.Locale("es", "CL", ""));
     dateChooserCombo1.setNavigateFont(new java.awt.Font("Franklin Gothic Medium", java.awt.Font.PLAIN, 14));
 
+    javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+    jLayeredPane1.setLayout(jLayeredPane1Layout);
+    jLayeredPane1Layout.setHorizontalGroup(
+        jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 100, Short.MAX_VALUE)
+    );
+    jLayeredPane1Layout.setVerticalGroup(
+        jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 100, Short.MAX_VALUE)
+    );
+
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
     jPanel1Layout.setHorizontalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-            .addContainerGap(382, Short.MAX_VALUE)
+            .addContainerGap()
+            .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
             .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(278, 278, 278))
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGap(156, 156, 156)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(153, 153, 153)
+            .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(32, 32, 32)
-            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(473, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(142, 142, 142)
+                    .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(15, 15, 15)
+                    .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(74, 74, 74)
+                    .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(165, Short.MAX_VALUE))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,6 +186,10 @@ public class Agendamiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JDayChooser jDayChooser1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.components.JSpinField jSpinField1;
     // End of variables declaration//GEN-END:variables
 }
