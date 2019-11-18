@@ -8,12 +8,16 @@ package principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Girona 03
  */
 public class TomarPedido extends javax.swing.JFrame {
+
+    DefaultTableModel  modelo = new DefaultTableModel();
 
     /**
      * Creates new form Vendedor
@@ -27,9 +31,18 @@ public class TomarPedido extends javax.swing.JFrame {
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String d = date.format(now);
-        String h= hour.format(now);// hora del momento congelada
+        String h = hour.format(now);// hora del momento congelada
         txtfecha.setText(d);
+
+        
+        
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Subtotal");
        
+        this.tabla.setModel(modelo);
 
     }
 
@@ -46,11 +59,11 @@ public class TomarPedido extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        txtcodigo = new javax.swing.JTextField();
+        txtproducto = new javax.swing.JTextField();
+        txtvalor = new javax.swing.JTextField();
+        txtcantidad = new javax.swing.JTextField();
+        txtsubtotal = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -63,7 +76,7 @@ public class TomarPedido extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        chooserdate = new datechooser.beans.DateChooserCombo();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -83,7 +96,7 @@ public class TomarPedido extends javax.swing.JFrame {
         txtfechahoy = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,15 +104,46 @@ public class TomarPedido extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de Productos"));
 
-        jTextField4.setText(" ");
+        txtcodigo.setText(" ");
 
-        jTextField6.setText(" ");
-
-        jTextField7.setText("   ");
-
-        jTextField8.setText("   ");
+        txtsubtotal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtsubtotalFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtsubtotalFocusLost(evt);
+            }
+        });
+        txtsubtotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtsubtotalMouseClicked(evt);
+            }
+        });
+        txtsubtotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsubtotalActionPerformed(evt);
+            }
+        });
+        txtsubtotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtsubtotalKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtsubtotalKeyReleased(evt);
+            }
+        });
 
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Código");
 
@@ -126,20 +170,20 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(56, 56, 56)
                         .addComponent(jLabel8)))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +191,7 @@ public class TomarPedido extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                         .addComponent(jButton1))))
         );
@@ -164,11 +208,11 @@ public class TomarPedido extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtsubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(161, 161, 161))
@@ -182,7 +226,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
         jLabel3.setText("DIRECCION");
 
-        dateChooserCombo2.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
+        chooserdate.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(222, 222, 222),
@@ -224,12 +268,12 @@ public class TomarPedido extends javax.swing.JFrame {
                 false,
                 true)));
     try {
-        dateChooserCombo2.setDefaultPeriods(new datechooser.model.multiple.PeriodSet(new datechooser.model.multiple.Period(new java.util.GregorianCalendar(2019, 10, 14),
+        chooserdate.setDefaultPeriods(new datechooser.model.multiple.PeriodSet(new datechooser.model.multiple.Period(new java.util.GregorianCalendar(2019, 10, 14),
             new java.util.GregorianCalendar(2019, 10, 14))));
 } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
     e1.printStackTrace();
     }
-    dateChooserCombo2.setLocale(new java.util.Locale("es", "CL", ""));
+    chooserdate.setLocale(new java.util.Locale("es", "CL", ""));
 
     jLabel4.setText("FECHA DE DESPACHO");
 
@@ -308,7 +352,7 @@ public class TomarPedido extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chooserdate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +387,7 @@ public class TomarPedido extends javax.swing.JFrame {
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chooserdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
                     .addGap(1, 1, 1)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -374,7 +418,12 @@ public class TomarPedido extends javax.swing.JFrame {
 
     txtfechahoy.setText("FECHA DE HOY");
 
-    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+    tabla = new javax.swing.JTable(){
+        public boolean isCellEditable(int rowIndex, int colIndex) {
+            return false; //Disallow the editing of any cell
+        }
+    };
+    tabla.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
             {null, null, null, null},
             {null, null, null, null},
@@ -384,8 +433,16 @@ public class TomarPedido extends javax.swing.JFrame {
         new String [] {
             "Title 1", "Title 2", "Title 3", "Title 4"
         }
-    ));
-    jScrollPane1.setViewportView(jTable1);
+    ) {
+        boolean[] canEdit = new boolean [] {
+            false, false, false, false
+        };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit [columnIndex];
+        }
+    });
+    jScrollPane1.setViewportView(tabla);
 
     javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
     jPanel5.setLayout(jPanel5Layout);
@@ -438,6 +495,11 @@ public class TomarPedido extends javax.swing.JFrame {
     );
 
     jButton2.setText("ACEPTAR ENVIAR");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton2ActionPerformed(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
@@ -482,6 +544,128 @@ public class TomarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txthorafolioActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (txtcodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
+            limpiatxt();
+        } else {
+            if (txtcantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "campo cantidad Vacio");
+                limpiatxt();
+
+            } else {
+                if (txtvalor.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "campo valor Vacio");
+                    limpiatxt();
+                } else {
+                    String[] detalle = new String[5];
+                    detalle[0] = txtcodigo.getText();
+                    detalle[1] = txtproducto.getText();
+                    detalle[2] = txtcantidad.getText();
+                    detalle[3] = txtvalor.getText();
+                    detalle[4] = txtsubtotal.getText();
+                    modelo.addRow(detalle);
+                   
+                    limpiatxt();
+                }
+
+            }
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void limpiatxt() {
+        txtcodigo.setText("");
+        txtproducto.setText("");
+        txtcantidad.setText("");
+        txtvalor.setText("");
+        txtsubtotal.setText("");
+    }
+    private void txtsubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsubtotalActionPerformed
+
+
+    }//GEN-LAST:event_txtsubtotalActionPerformed
+
+    private void txtsubtotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtsubtotalMouseClicked
+        int cant = Integer.parseInt(txtcantidad.getText());
+        int val = Integer.parseInt(txtvalor.getText());
+        int resul = cant * val;
+        String r = String.valueOf(resul);
+
+        txtsubtotal.setText(r);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_txtsubtotalMouseClicked
+
+    private void txtsubtotalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsubtotalKeyPressed
+
+    }//GEN-LAST:event_txtsubtotalKeyPressed
+
+    private void txtsubtotalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsubtotalKeyReleased
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsubtotalKeyReleased
+
+    private void txtsubtotalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsubtotalFocusGained
+      
+    }//GEN-LAST:event_txtsubtotalFocusGained
+
+    private void txtsubtotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtsubtotalFocusLost
+        if (txtcantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "campo cantidad Vacio");
+        } else {
+            if (txtvalor.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "campo valor Vacio");
+            } else {
+
+                int cant = Integer.parseInt(txtcantidad.getText());
+                int val = Integer.parseInt(txtvalor.getText());
+                int resul = cant * val;
+                String r = String.valueOf(resul);
+                txtsubtotal.setText(r);
+            }
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsubtotalFocusLost
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    if (txtcodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
+            limpiatxt();
+        } else {
+            if (txtcantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "campo cantidad Vacio");
+                limpiatxt();
+
+            } else {
+                if (txtvalor.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "campo valor Vacio");
+                    limpiatxt();
+                } else {
+                    String[] detalle = new String[5];
+                    detalle[0] = txtcodigo.getText();
+                    detalle[1] = txtproducto.getText();
+                    detalle[2] = txtcantidad.getText();
+                    detalle[3] = txtvalor.getText();
+                    detalle[4] = txtsubtotal.getText();
+                    modelo.addRow(detalle);
+                    limpiatxt();
+                }
+
+            }
+        }
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -520,7 +704,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
+    private datechooser.beans.DateChooserCombo chooserdate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -548,19 +732,19 @@ public class TomarPedido extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtcantidad;
+    private javax.swing.JTextField txtcodigo;
     private javax.swing.JLabel txtfecha;
     private javax.swing.JLabel txtfechahoy;
     private javax.swing.JTextField txthorafolio;
+    private javax.swing.JTextField txtproducto;
+    private javax.swing.JTextField txtsubtotal;
+    private javax.swing.JTextField txtvalor;
     // End of variables declaration//GEN-END:variables
 }
