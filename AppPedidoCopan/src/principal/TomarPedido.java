@@ -33,7 +33,8 @@ public class TomarPedido extends javax.swing.JFrame {
 
         initComponents();
 
-        comboproducto.setModel(cx.obt_producto());
+        comboproducto.setModel(cx.carga_producto_combo());
+        combocliente.setModel(cx.carga_cliente_combo());
 
         setLocationRelativeTo(null);    //centra formulario
         this.setResizable(false);       //desactiva el boton maximizar
@@ -98,7 +99,7 @@ public class TomarPedido extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel15 = new javax.swing.JLabel();
-        txthorafolio1 = new javax.swing.JTextField();
+        txtcategoria = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtfecha = new javax.swing.JLabel();
         txtfechahoy = new javax.swing.JLabel();
@@ -188,7 +189,7 @@ public class TomarPedido extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtcodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -292,19 +293,30 @@ public class TomarPedido extends javax.swing.JFrame {
     jLabel5.setText("SUCURSAL ");
 
     combosucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    combosucursal.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            combosucursalActionPerformed(evt);
+        }
+    });
 
     jLabel13.setText("COMUNA");
 
-    txtrut.setText(" ");
+    txtrut.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txtrutFocusLost(evt);
+        }
+    });
+    txtrut.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            txtrutActionPerformed(evt);
+        }
+    });
 
     txtdireccion.setEditable(false);
     txtdireccion.setText(" ");
 
     txtcomuna.setEditable(false);
     txtcomuna.setText(" ");
-
-    txtrazonsocial.setEditable(false);
-    txtrazonsocial.setText(" ");
 
     combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
     combocliente.addActionListener(new java.awt.event.ActionListener() {
@@ -322,11 +334,11 @@ public class TomarPedido extends javax.swing.JFrame {
 
     jLabel15.setText("TIPO DE CLIENTE");
 
-    txthorafolio1.setEditable(false);
-    txthorafolio1.setText(" ");
-    txthorafolio1.addActionListener(new java.awt.event.ActionListener() {
+    txtcategoria.setEditable(false);
+    txtcategoria.setText(" ");
+    txtcategoria.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            txthorafolio1ActionPerformed(evt);
+            txtcategoriaActionPerformed(evt);
         }
     });
 
@@ -363,15 +375,15 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addGroup(txtdvLayout.createSequentialGroup()
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(txthorafolio1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(txtdvLayout.createSequentialGroup()
                     .addGroup(txtdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(txtdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(chooserdate, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(combosucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(txtdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(chooserdate, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                        .addComponent(combosucursal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(txtdvLayout.createSequentialGroup()
                     .addComponent(jRadioButton1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -414,7 +426,7 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addComponent(jRadioButton2))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(txtdvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(txthorafolio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(txtdvLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
                     .addComponent(jLabel15)))
@@ -682,16 +694,54 @@ public class TomarPedido extends javax.swing.JFrame {
         
         
         
+       
+        
+        
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_comboproductoActionPerformed
 
-    private void txthorafolio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthorafolio1ActionPerformed
+    private void txtcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txthorafolio1ActionPerformed
+    }//GEN-LAST:event_txtcategoriaActionPerformed
 
     private void comboclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboclienteActionPerformed
+         String op = (String) combocliente.getSelectedItem();
+         System.out.println("op  :"+op);
+         cx.obt_datoscliente(op, txtrut, txtrazonsocial,txtcategoria);
+         
+         String rut = txtrut.getText();
+         
+        combosucursal.setModel(cx.carga_sucursales_combo(rut));
+          
+          
+          
         // TODO add your handling code here:
     }//GEN-LAST:event_comboclienteActionPerformed
+
+    private void txtrutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrutActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrutActionPerformed
+
+    private void txtrutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtrutFocusLost
+    
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrutFocusLost
+
+    private void combosucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combosucursalActionPerformed
+       String ops = (String) combosucursal.getSelectedItem();
+        
+       cx.obt_direccion(ops,txtdireccion,txtcomuna);
+        
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combosucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,13 +814,13 @@ public class TomarPedido extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtcantidad;
+    private javax.swing.JTextField txtcategoria;
     private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txtcomuna;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JPanel txtdv;
     private javax.swing.JLabel txtfecha;
     private javax.swing.JLabel txtfechahoy;
-    private javax.swing.JTextField txthorafolio1;
     private javax.swing.JTextField txtproducto;
     private javax.swing.JTextField txtrazonsocial;
     private javax.swing.JTextField txtrut;

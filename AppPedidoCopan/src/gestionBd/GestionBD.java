@@ -47,38 +47,91 @@ public class GestionBD {
         return res;
     }
 
-    public DefaultComboBoxModel obt_producto() {
+    public DefaultComboBoxModel carga_producto_combo() {
         DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
         ListaModelo.addElement("Seleccione un Producto");
         ResultSet res = this.consulta("select * from producto order by producto asc");
         try {
             while (res.next()) {
                 ListaModelo.addElement(res.getString("producto"));
-               
             }
             res.close();
         } catch (SQLException ex) {
             System.err.println("error : " + ex.getMessage());
         }
-        return  ListaModelo;
+        return ListaModelo;
     }
-    
-    
 
-    public JTextField obt_codigo_pro(String op,JTextField txtcodigo){
-        ResultSet res = this.consulta("select * from producto where producto='"+op+"'");
-        try{
-            while(res.next()){
-            txtcodigo.setText(res.getString("idproducto"));
+    public DefaultComboBoxModel carga_cliente_combo() {
+        DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
+        ListaModelo.addElement("Seleccione un Cliente");
+        ResultSet res = this.consulta("select * from cliente order by cliente");
+        try {
+            while (res.next()) {
+                ListaModelo.addElement(res.getString("cliente"));
             }
-        
-        
-        }catch(SQLException ex){
-            System.out.println("consulta mala : "+ex.getMessage());
+            res.close();
+        } catch (SQLException ex) {
+            System.err.println("error : " + ex.getMessage());
         }
-        
+        return ListaModelo;
+    }
+
+    public DefaultComboBoxModel carga_sucursales_combo(String rut) {
+        DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
+        ListaModelo.addElement("Seleccione una Sucursal");
+        ResultSet res = this.consulta("select * from direccion join cliente on direccion.idrut=cliente.idrut  where cliente.idrut='" + rut + "'");
+        try {
+            while (res.next()) {
+                ListaModelo.addElement(res.getString("direccion"));
+            }
+            res.close();
+        } catch (SQLException ex) {
+            System.err.println("error : " + ex.getMessage());
+        }
+        return ListaModelo;
+    }
+
+    public JTextField obt_codigo_pro(String op, JTextField txtcodigo) {
+        ResultSet res = this.consulta("select * from producto where producto='" + op + "'");
+        try {
+            while (res.next()) {
+                txtcodigo.setText(res.getString("idproducto"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("consulta mala : " + ex.getMessage());
+        }
+
         return txtcodigo;
     }
-    
-    
+
+    public JTextField obt_direccion(String op, JTextField txtdireccion, JTextField txtcomuna) {
+        ResultSet res = this.consulta("select * from direccion join comuna where direccion='" + op + "'");
+        try {
+            while (res.next()) {
+                txtdireccion.setText(res.getString("direccion"));
+                txtcomuna.setText(res.getString("comuna"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("consulta mala : " + ex.getMessage());
+        }
+
+        return txtcomuna;
+    }
+
+    public JTextField obt_datoscliente(String op, JTextField txtrut, JTextField txtrazonsocial, JTextField txtcategoria) {
+        ResultSet res = this.consulta("select * from cliente join categoria on cliente.idcategoria=categoria.idcategoria where cliente='" + op + "'");
+        try {
+            while (res.next()) {
+                txtrut.setText(res.getString("idrut"));
+                txtrazonsocial.setText(res.getString("cliente"));
+                txtcategoria.setText(res.getString("categoria"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("consulta mala : " + ex.getMessage());
+        }
+        return txtrut;
+
+    }
+
 }
