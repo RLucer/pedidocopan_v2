@@ -489,10 +489,26 @@ public class TomarPedido extends javax.swing.JFrame {
 
     jLabel17.setText("TOTAL");
 
+    txtneto.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            txtnetoFocusLost(evt);
+        }
+    });
+    txtneto.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            txtnetoActionPerformed(evt);
+        }
+    });
+
     jButton3.setText("Eliminar");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jButton3ActionPerformed(evt);
+        }
+    });
+    jButton3.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            jButton3KeyPressed(evt);
         }
     });
 
@@ -641,6 +657,7 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //al hacer click en el boton
         if (txtcodigo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
             limpiatxt();
@@ -666,7 +683,8 @@ public class TomarPedido extends javax.swing.JFrame {
             }
         }
         comboproducto.setSelectedIndex(0);
-        // TODO add your handling code here:
+        calcula_total_neto();
+        calcula_iva_total();
     }//GEN-LAST:event_jButton1ActionPerformed
     public void limpiatxt() {
         txtcodigo.setText("");
@@ -724,6 +742,7 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsubtotalFocusLost
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        //presionar boton con tecla enter
         if (txtcodigo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
             limpiatxt();
@@ -746,15 +765,45 @@ public class TomarPedido extends javax.swing.JFrame {
                     modelo.addRow(detalle);
                     limpiatxt();
                 }
-
             }
         }
-
+        comboproducto.setSelectedIndex(0);
+        calcula_total_neto();
+        calcula_iva_total();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1KeyPressed
 
+    private void calcula_total_neto() {
+        int t = 0;
+        int p = 0;
+        String pp = "";
+
+        String tn = Integer.toString(t);
+        if (modelo.getRowCount() > 0) {
+
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+
+                p = Integer.parseInt(modelo.getValueAt(i, 4).toString());
+                t = t + p;
+                pp = Integer.toString(t);
+
+            }
+          
+        }
+        txtneto.setText(pp);
+    }
+
+    private void calcula_iva_total() {
+        int net = Integer.parseInt(txtneto.getText());
+        int iva = net * 19 / 100;
+        int tot = net + iva;
+        txtiva.setText(Integer.toString(iva));
+        txttotalpedido.setText(Integer.toString(tot));
+    }
+
+
     private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
-        String op = (String) comboproducto.getSelectedItem();
+        //String op = (String) comboproducto.getSelectedItem();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcodigoActionPerformed
@@ -772,17 +821,16 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcategoriaActionPerformed
 
     private void comboclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboclienteActionPerformed
-        
+
         String ven = txtcodigovendedor.getText();
         String op = (String) combocliente.getSelectedItem();
-        
-        
+
         cx.obt_datoscliente(op, txtrut, txtrazonsocial, txtcategoria);
 
         String rut = txtrut.getText();
 
         combosucursal.setModel(cx.carga_sucursales_combo(rut));
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_comboclienteActionPerformed
 
@@ -808,9 +856,31 @@ public class TomarPedido extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modelo.removeRow(tabla.getSelectedRow());
-
+        if(txtneto.getText() != ""){
+       // calcula_total_neto();
+       // calcula_iva_total();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtnetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnetoActionPerformed
+
+    private void txtnetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnetoFocusLost
+        calcula_total_neto();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnetoFocusLost
+
+    private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
+
+        modelo.removeRow(tabla.getSelectedRow());
+        calcula_total_neto();
+        calcula_iva_total();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3KeyPressed
 
     /**
      * @param args the command line arguments
