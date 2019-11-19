@@ -62,6 +62,8 @@ public class GestionBD {
         }
         return  ListaModelo;
     }
+    
+    
 
     public JTextField obt_codigo_pro(String op,JTextField txtcodigo){
         ResultSet res = this.consulta("select * from producto where producto='"+op+"'");
