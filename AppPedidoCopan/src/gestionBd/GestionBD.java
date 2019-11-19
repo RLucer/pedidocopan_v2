@@ -106,7 +106,7 @@ public class GestionBD {
     }
 
     public JTextField obt_direccion(String op, JTextField txtdireccion, JTextField txtcomuna) {
-        ResultSet res = this.consulta("select * from direccion join comuna where direccion='" + op + "'");
+        ResultSet res = this.consulta("select * from direccion join comuna on direccion.idcomuna=comuna.idcomuna where direccion='" + op + "'");
         try {
             while (res.next()) {
                 txtdireccion.setText(res.getString("direccion"));
@@ -133,5 +133,18 @@ public class GestionBD {
         return txtrut;
 
     }
+ public JTextField obt_datoscliente_por_rut(String op,  JTextField txtrazonsocial, JTextField txtcategoria) {
+        ResultSet res = this.consulta("select * from cliente join categoria on cliente.idcategoria=categoria.idcategoria where idrut='" + op + "'");
+        try {
+            while (res.next()) {
+              
+                txtrazonsocial.setText(res.getString("cliente"));
+                txtcategoria.setText(res.getString("categoria"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("consulta mala : " + ex.getMessage());
+        }
+        return txtrazonsocial;
 
+    }
 }
