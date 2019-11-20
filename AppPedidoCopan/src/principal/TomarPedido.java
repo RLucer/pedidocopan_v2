@@ -122,13 +122,29 @@ public class TomarPedido extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de Producto"));
 
         txtcodigo.setText(" ");
+        txtcodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtcodigoFocusLost(evt);
+            }
+        });
         txtcodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcodigoActionPerformed(evt);
             }
         });
+        txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcodigoKeyPressed(evt);
+            }
+        });
 
         txtproducto.setEditable(false);
+
+        txtcantidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtcantidadFocusLost(evt);
+            }
+        });
 
         txtsubtotal.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -319,12 +335,19 @@ public class TomarPedido extends javax.swing.JFrame {
             txtrutActionPerformed(evt);
         }
     });
+    txtrut.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            txtrutKeyPressed(evt);
+        }
+    });
 
     txtdireccion.setEditable(false);
     txtdireccion.setText(" ");
 
     txtcomuna.setEditable(false);
     txtcomuna.setText(" ");
+
+    txtrazonsocial.setEditable(false);
 
     combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
     combocliente.addActionListener(new java.awt.event.ActionListener() {
@@ -414,7 +437,7 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addComponent(txtrazonsocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-            .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel3)
                 .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
@@ -489,6 +512,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     jLabel17.setText("TOTAL");
 
+    txtneto.setEditable(false);
     txtneto.addFocusListener(new java.awt.event.FocusAdapter() {
         public void focusLost(java.awt.event.FocusEvent evt) {
             txtnetoFocusLost(evt);
@@ -499,6 +523,10 @@ public class TomarPedido extends javax.swing.JFrame {
             txtnetoActionPerformed(evt);
         }
     });
+
+    txtiva.setEditable(false);
+
+    txttotalpedido.setEditable(false);
 
     jButton3.setText("Eliminar");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -519,9 +547,9 @@ public class TomarPedido extends javax.swing.JFrame {
     jPanel5Layout.setHorizontalGroup(
         jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGap(10, 10, 10)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(10, 10, 10)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -540,9 +568,7 @@ public class TomarPedido extends javax.swing.JFrame {
                                 .addComponent(txttotalpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                                 .addComponent(txtneto)
                                 .addComponent(txtiva)))))
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(10, 10, 10)
-                    .addComponent(jScrollPane1)))
+                .addComponent(jScrollPane1))
             .addGap(10, 10, 10))
     );
     jPanel5Layout.setVerticalGroup(
@@ -652,7 +678,7 @@ public class TomarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        limpiacliente();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -686,7 +712,16 @@ public class TomarPedido extends javax.swing.JFrame {
         calcula_total_neto();
         calcula_iva_total();
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void limpiacliente() {
+        txtrazonsocial.setText("");
+        txtrut.setText("");
+        txtcategoria.setText("");
+        txtdireccion.setText("");
+        txtcomuna.setText("");
+    }
+
     public void limpiatxt() {
+
         txtcodigo.setText("");
         txtproducto.setText("");
         txtcantidad.setText("");
@@ -788,7 +823,7 @@ public class TomarPedido extends javax.swing.JFrame {
                 pp = Integer.toString(t);
 
             }
-          
+
         }
         txtneto.setText(pp);
     }
@@ -809,6 +844,7 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcodigoActionPerformed
 
     private void comboproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboproductoActionPerformed
+
         String pro = (String) comboproducto.getSelectedItem();
         txtproducto.setText(pro);
         cx.obt_codigo_pro(pro, txtcodigo);
@@ -826,7 +862,7 @@ public class TomarPedido extends javax.swing.JFrame {
         String op = (String) combocliente.getSelectedItem();
 
         cx.obt_datoscliente(op, txtrut, txtrazonsocial, txtcategoria);
-
+//
         String rut = txtrut.getText();
 
         combosucursal.setModel(cx.carga_sucursales_combo(rut));
@@ -841,8 +877,9 @@ public class TomarPedido extends javax.swing.JFrame {
 
     private void txtrutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtrutFocusLost
         String rut = txtrut.getText();
-        cx.obt_datoscliente_por_rut(rut, txtrazonsocial, txtcategoria);
+        cx.obt_datoscliente_por_rut(rut, txtrazonsocial, txtcategoria, txtrut);
         combosucursal.setModel(cx.carga_sucursales_combo(rut));
+
         // TODO add your handling code here:
     }//GEN-LAST:event_txtrutFocusLost
 
@@ -855,11 +892,18 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_combosucursalActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        modelo.removeRow(tabla.getSelectedRow());
-        if(txtneto.getText() != ""){
-       // calcula_total_neto();
-       // calcula_iva_total();
+
+        if (modelo.getRowCount() > 1) {
+            modelo.removeRow(tabla.getSelectedRow());
+            calcula_total_neto();
+            calcula_iva_total();
+        } else {
+            modelo.removeRow(tabla.getSelectedRow());
+            txtneto.setText("0");
+            txtiva.setText("0");
+            txttotalpedido.setText("0");
         }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -881,6 +925,25 @@ public class TomarPedido extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3KeyPressed
+
+    private void txtrutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrutKeyPressed
+
+    private void txtcodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcodigoFocusLost
+        String cod = txtcodigo.getText();
+        cx.obt_producto_por_cod(cod, txtproducto, txtvalor, txtcodigo);
+
+    }//GEN-LAST:event_txtcodigoFocusLost
+
+    private void txtcodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoKeyPressed
+
+    private void txtcantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcantidadFocusLost
+        String cod = txtcodigo.getText();
+        cx.obt_producto_por_cod(cod, txtproducto, txtvalor, txtcodigo);        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcantidadFocusLost
 
     /**
      * @param args the command line arguments

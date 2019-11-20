@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /*
@@ -105,6 +106,28 @@ public class GestionBD {
         return txtcodigo;
     }
 
+    public JTextField obt_producto_por_cod(String cod, JTextField txtproducto, JTextField txtvalor, JTextField txtcodigo) {
+        ResultSet res = this.consulta("select * from producto where idproducto='" + cod + "'");
+        try {
+
+            if (res.next()) {          //-- verificar si el resutlado de la consulta esta vacio avanza una fila
+                res.beforeFirst();   // retrocede el puntero a la primera fila
+                while (res.next()) {
+                    txtproducto.setText(res.getString("producto"));
+                    txtvalor.setText(res.getString("valorlista"));
+                }
+                res.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error Producto NO Registrado");
+                txtproducto.setText("");
+                txtcodigo.setText("");
+            }
+        } catch (SQLException ex) {
+            System.out.println("error" + ex.getMessage());
+        }
+        return null;
+    }
+
     public JTextField obt_direccion(String op, JTextField txtdireccion, JTextField txtcomuna) {
         ResultSet res = this.consulta("select * from direccion join comuna on direccion.idcomuna=comuna.idcomuna where direccion='" + op + "'");
         try {
@@ -133,13 +156,25 @@ public class GestionBD {
         return txtrut;
 
     }
- public JTextField obt_datoscliente_por_rut(String op,  JTextField txtrazonsocial, JTextField txtcategoria) {
+
+    public JTextField obt_datoscliente_por_rut(String op, JTextField txtrazonsocial, JTextField txtcategoria, JTextField txtrut) {
         ResultSet res = this.consulta("select * from cliente join categoria on cliente.idcategoria=categoria.idcategoria where idrut='" + op + "'");
         try {
-            while (res.next()) {
-              
-                txtrazonsocial.setText(res.getString("cliente"));
-                txtcategoria.setText(res.getString("categoria"));
+
+            if (res.next()) {          //-- verificar si el resutlado de la consulta esta vacio avanza una fila
+                res.beforeFirst();   // retrocede el puntero a la primera fila
+
+                while (res.next()) {
+
+                    txtrazonsocial.setText(res.getString("cliente"));
+                    txtcategoria.setText(res.getString("categoria"));
+                }
+                res.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error Cliente NO Registrado");
+                txtrut.setText("");
+                txtrazonsocial.setText("");
+                txtcategoria.setText("");
             }
         } catch (SQLException ex) {
             System.out.println("consulta mala : " + ex.getMessage());
