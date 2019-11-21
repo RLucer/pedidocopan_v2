@@ -176,7 +176,7 @@ public class GestionBD {
                 txtcategoria.setText(res.getString("categoria"));
             }
         } catch (SQLException ex) {
-            System.out.println("consulta mala : " + ex.getMessage());
+            //System.out.println("consulta mala : " + ex.getMessage());
         }
         return txtrut;
 
@@ -196,7 +196,9 @@ public class GestionBD {
                 }
                 res.close();
             } else {
-                JOptionPane.showMessageDialog(null, "Error Cliente NO Registrado");
+               JOptionPane.showMessageDialog(null, "ERROR:\n"
+                        + "Cliente no Registrado", "Verifique Información",
+                        JOptionPane.ERROR_MESSAGE);
                 txtrut.setText("");
                 txtrazonsocial.setText("");
                 txtcategoria.setText("");
