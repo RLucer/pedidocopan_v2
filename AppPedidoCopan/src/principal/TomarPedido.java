@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import principal.Vendedor;
 
 /**
  *
@@ -23,7 +24,9 @@ import javax.swing.JTextField;
 public class TomarPedido extends javax.swing.JFrame {
 
     GestionBD cx = new GestionBD();
-
+    Login lo = new Login();
+   
+    
     DefaultTableModel modelo = new DefaultTableModel(); //instancio un modelo para asignarlee a mi tabla
 
     /**
@@ -36,14 +39,14 @@ public class TomarPedido extends javax.swing.JFrame {
         this.setResizable(false);       //desactiva el boton maximizar
         comboproducto.setModel(cx.carga_producto_combo()); //lleno con info los combobox desde la bd
         combocliente.setModel(cx.carga_cliente_combo());
-
+//------------------------------------------------------------------
         Date now = new Date(System.currentTimeMillis());             // hora del dia
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String d = date.format(now);
         String h = hour.format(now);// hora del momento congelada
         txtfecha.setText(d);
-
+        
         // credo el modelo de mi tabla que ingresara y mostrara mis datos
         modelo.addColumn("Codigo");
         modelo.addColumn("Producto");
@@ -51,8 +54,12 @@ public class TomarPedido extends javax.swing.JFrame {
         modelo.addColumn("Valor");
         modelo.addColumn("Subtotal");
         this.tabla.setModel(modelo);
-
-    }
+      
+        
+        //---------------------------------------
+      
+     
+          }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -540,7 +547,7 @@ public class TomarPedido extends javax.swing.JFrame {
         }
     });
 
-    jLabel18.setText("Si desea eliminar algun producto solicitado marque la fila y presione el boton");
+    jLabel18.setText("Si desea eliminar algun producto solicitado marque la fila y presione el boton  ");
 
     javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
     jPanel5.setLayout(jPanel5Layout);
@@ -550,7 +557,7 @@ public class TomarPedido extends javax.swing.JFrame {
             .addGap(10, 10, 10)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -598,7 +605,6 @@ public class TomarPedido extends javax.swing.JFrame {
     txtfechahoy1.setText("USUARIO :");
 
     txtcodigovendedor.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-    txtcodigovendedor.setText("26");
     txtcodigovendedor.setInheritsPopupMenu(false);
 
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1024,7 +1030,7 @@ public class TomarPedido extends javax.swing.JFrame {
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcategoria;
     private javax.swing.JTextField txtcodigo;
-    private javax.swing.JLabel txtcodigovendedor;
+    public static javax.swing.JLabel txtcodigovendedor;
     private javax.swing.JTextField txtcomuna;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JLabel txtfecha;

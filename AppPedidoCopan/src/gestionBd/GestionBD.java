@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -42,10 +43,34 @@ public class GestionBD {
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             res = pstm.executeQuery();
+
         } catch (SQLException e) {
             System.err.println("error : " + e.getMessage());
         }
         return res;
+    }
+
+    public String LOGUEAR(String nombre) {
+        String salida = "";
+        ResultSet res = this.consulta("select * from usuario  where usuario.nombre='" + nombre + "'");
+        try {
+
+            while (res.next()) {
+                salida = res.getString("nombre");
+                salida = salida + "," + res.getString("clave");
+                salida = salida + "," + res.getString("idrol");
+                salida = salida + "," + res.getString("idusuario");
+                salida = salida + "," + res.getString("apellido");
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.err.println("error : " + ex.getMessage());
+            System.out.println("no se hizo la consulta con el rol");
+        }
+
+        System.out.println("consulta realizada!");
+        return salida;
     }
 
     public DefaultComboBoxModel carga_producto_combo() {

@@ -5,19 +5,24 @@
  */
 package principal;
 
+import gestionBd.GestionBD;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import principal.Principal;
+import principal.TomarPedido;
+import principal.Vendedor;
+
 /**
  *
  * @author Girona 03
  */
 public class Login extends javax.swing.JFrame {
-    /**
-     * Creates new form Login
-     */
+
     public Login() {
         initComponents();
-       setLocationRelativeTo(null);    //centra formulario
+        setLocationRelativeTo(null);    //centra formulario
         this.setResizable(false);       //desactiva el boton maximizar
-     
     }
 
     /**
@@ -31,11 +36,11 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btningresar = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        txtusuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN                                                           ");
@@ -44,12 +49,22 @@ public class Login extends javax.swing.JFrame {
 
         btningresar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
         btningresar.setText("INGRESAR");
-
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText(" ");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        btningresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                btningresarActionPerformed(evt);
+            }
+        });
+        btningresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btningresarKeyPressed(evt);
+            }
+        });
+
+        txtusuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtusuario.setForeground(new java.awt.Color(102, 102, 102));
+        txtusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusuarioActionPerformed(evt);
             }
         });
 
@@ -62,6 +77,8 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 14)); // NOI18N
         jLabel3.setText("PASSWORD            ");
 
+        txtpassword.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,17 +89,17 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btningresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
+                                    .addComponent(txtpassword)
+                                    .addComponent(txtusuario, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,15 +108,15 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addGap(46, 46, 46)
+                .addComponent(btningresar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,9 +139,77 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtusuarioActionPerformed
+
+    public void logg() {
+        GestionBD rl = null;
+        try {
+            rl = new GestionBD();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String usu = txtusuario.getText();
+        String x = rl.LOGUEAR(usu);                 //me devuelve el usuario y la contraseña en un string llamado x
+        String datos[] = x.split(",");
+        int admn = 4;
+        int venn = 3;
+
+        if (txtusuario.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ingrese nombre usuario");
+        } else {
+            if (datos[0].equals(txtusuario.getText())) {
+                if (txtpassword.getText().equals(datos[1])) {
+
+                    int op = Integer.parseInt(datos[2]);
+                    switch (op) {
+                        case 3:
+                            Vendedor v = new Vendedor();
+                            v.setVisible(true);
+                           //  envio al frame que quiero una variable a un jtextfield q se encuentra en otro frame 
+                           Vendedor.lblnombreapellido.setText(datos[0]+" "+datos[4]);
+                           Vendedor.lblcodv.setText(datos[3]);
+                                   
+                           
+                             
+                            dispose();
+
+                            break;
+                        case 4:
+                            Principal p = new Principal();
+                            p.setVisible(true);
+                            dispose();
+                            break;
+                        default:
+                        // code block
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Acceso denegado:\n"
+                            + "Por favor ingrese contraseña correcta", "Acceso denegado",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Acceso denegado:\n"
+                        + "Por favor ingrese un usuario y/o contraseña correctos", "Acceso denegado",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+    }
+
+
+    private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
+        //boton ingresar
+        logg();
+    }//GEN-LAST:event_btningresarActionPerformed
+
+    private void btningresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btningresarKeyPressed
+
+          logg();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btningresarKeyPressed
 
     /**
      * @param args the command line arguments
@@ -167,7 +252,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField txtpassword;
+    private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
+
+    private GestionBD GestionBD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
