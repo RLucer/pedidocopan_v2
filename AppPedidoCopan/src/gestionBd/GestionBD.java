@@ -197,9 +197,9 @@ public class GestionBD {
                 res.close();
             } else {
               
-                //JOptionPane.showMessageDialog(null, "ERROR:\n"
-                  //      + "Cliente no Registrado", "Verifique Información",
-                    //    JOptionPane.ERROR_MESSAGE);
+            /*    JOptionPane.showMessageDialog(null, "ERROR:\n"
+                       + "Cliente no Registrado", "Verifique Información",
+                       JOptionPane.ERROR_MESSAGE);*/
                 txtrut.setText("");
                 txtrazonsocial.setText("");
                 txtcategoria.setText("");

@@ -41,8 +41,6 @@ public class TomarPedido extends javax.swing.JFrame {
         this.setResizable(false);       //desactiva el boton maximizar
         combocliente.setEnabled(false);
         comboproducto.setModel(cx.carga_producto_combo()); //lleno con info los combobox desde la bd
-
-   
 //------------------------------------------------------------------
         Date now = new Date(System.currentTimeMillis());             // hora del dia
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
@@ -50,13 +48,11 @@ public class TomarPedido extends javax.swing.JFrame {
         String d = date.format(now);
         String h = hour.format(now);// hora del momento congelada
         txtfecha.setText(d);
-
         // credo el modelo de mi tabla que ingresara y mostrara mis datos
         crear_modelo_tabla();   //llamo al metodo que asigna las columnas a mi tabla
         //---------------------------------------
-        System.out.println("cod "+cod);
-       combocliente.setModel(cx.carga_cliente_combo(txtcodven.getName()));  
-    }
+ 
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -355,11 +351,11 @@ public class TomarPedido extends javax.swing.JFrame {
         }
     });
     txtrut.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyTyped(java.awt.event.KeyEvent evt) {
-            txtrutKeyTyped(evt);
-        }
         public void keyPressed(java.awt.event.KeyEvent evt) {
             txtrutKeyPressed(evt);
+        }
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            txtrutKeyTyped(evt);
         }
     });
 
@@ -371,7 +367,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     txtrazonsocial.setEditable(false);
 
-    combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    combocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pinche Rut para Activar" }));
     combocliente.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             comboclienteActionPerformed(evt);
@@ -614,7 +610,7 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addComponent(txttotalpedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(31, Short.MAX_VALUE))
+            .addGap(10, 10, 10))
     );
 
     txtfechahoy1.setText("USUARIO :");
@@ -689,9 +685,9 @@ public class TomarPedido extends javax.swing.JFrame {
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addContainerGap()
+            .addGap(8, 8, 8)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(20, 20, 20))
+            .addGap(8, 8, 8))
     );
 
     pack();
