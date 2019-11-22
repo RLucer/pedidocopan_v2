@@ -76,7 +76,7 @@ public class GestionBD {
     public DefaultComboBoxModel carga_producto_combo() {
         DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
         ListaModelo.addElement("Seleccione un Producto");
-        ResultSet res = this.consulta("select * from producto order by producto asc");
+        ResultSet res = this.consulta("Select producto.producto from producto");
         try {
             while (res.next()) {
                 ListaModelo.addElement(res.getString("producto"));
@@ -88,10 +88,10 @@ public class GestionBD {
         return ListaModelo;
     }
 
-    public DefaultComboBoxModel carga_cliente_combo() {
+    public DefaultComboBoxModel carga_cliente_combo(String op) {
         DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
         ListaModelo.addElement("Seleccione un Cliente");
-        ResultSet res = this.consulta("select * from cliente order by cliente");
+        ResultSet res = this.consulta("select cliente from cliente join direccion on cliente.idrut=direccion.idrut join usuario on direccion.idusuario=usuario.idusuario where usuario.idusuario='"+op +"'");
         try {
             while (res.next()) {
                 ListaModelo.addElement(res.getString("cliente"));
@@ -196,9 +196,10 @@ public class GestionBD {
                 }
                 res.close();
             } else {
-               JOptionPane.showMessageDialog(null, "ERROR:\n"
-                        + "Cliente no Registrado", "Verifique Información",
-                        JOptionPane.ERROR_MESSAGE);
+              
+                //JOptionPane.showMessageDialog(null, "ERROR:\n"
+                  //      + "Cliente no Registrado", "Verifique Información",
+                    //    JOptionPane.ERROR_MESSAGE);
                 txtrut.setText("");
                 txtrazonsocial.setText("");
                 txtcategoria.setText("");

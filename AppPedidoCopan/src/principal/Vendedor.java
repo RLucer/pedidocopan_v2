@@ -176,8 +176,9 @@ public class Vendedor extends javax.swing.JFrame {
         try {
             TomarPedido venta = new TomarPedido();
             venta.setVisible(true);
-            TomarPedido.txtcodigovendedor.setText(lblcodv.getText());
-
+            
+            TomarPedido.txtcodven.setText(lblcodv.getText());
+           
             // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Vendedor.class.getName()).log(Level.SEVERE, null, ex);

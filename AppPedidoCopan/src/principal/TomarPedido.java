@@ -25,7 +25,9 @@ public class TomarPedido extends javax.swing.JFrame {
 
     GestionBD cx = new GestionBD();
     Login lo = new Login();
-   
+
+    public static String cod;    
+    
     
     DefaultTableModel modelo = new DefaultTableModel(); //instancio un modelo para asignarlee a mi tabla
 
@@ -37,8 +39,10 @@ public class TomarPedido extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);    //centra formulario
         this.setResizable(false);       //desactiva el boton maximizar
+        combocliente.setEnabled(false);
         comboproducto.setModel(cx.carga_producto_combo()); //lleno con info los combobox desde la bd
-        combocliente.setModel(cx.carga_cliente_combo());
+
+   
 //------------------------------------------------------------------
         Date now = new Date(System.currentTimeMillis());             // hora del dia
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
@@ -46,20 +50,13 @@ public class TomarPedido extends javax.swing.JFrame {
         String d = date.format(now);
         String h = hour.format(now);// hora del momento congelada
         txtfecha.setText(d);
-        
+
         // credo el modelo de mi tabla que ingresara y mostrara mis datos
-        modelo.addColumn("Codigo");
-        modelo.addColumn("Producto");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Valor");
-        modelo.addColumn("Subtotal");
-        this.tabla.setModel(modelo);
-      
-        
+        crear_modelo_tabla();   //llamo al metodo que asigna las columnas a mi tabla
         //---------------------------------------
-      
-     
-          }
+        System.out.println("cod "+cod);
+       combocliente.setModel(cx.carga_cliente_combo(txtcodven.getName()));  
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,7 +118,7 @@ public class TomarPedido extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         txtfechahoy1 = new javax.swing.JLabel();
-        txtcodigovendedor = new javax.swing.JLabel();
+        txtcodven = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Solicitud de Pedido");
@@ -140,6 +137,9 @@ public class TomarPedido extends javax.swing.JFrame {
             }
         });
         txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodigoKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtcodigoKeyPressed(evt);
             }
@@ -147,12 +147,20 @@ public class TomarPedido extends javax.swing.JFrame {
 
         txtproducto.setEditable(false);
 
+        txtvalor.setEditable(false);
+
         txtcantidad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtcantidadFocusLost(evt);
             }
         });
+        txtcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcantidadKeyTyped(evt);
+            }
+        });
 
+        txtsubtotal.setEditable(false);
         txtsubtotal.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtsubtotalFocusGained(evt);
@@ -318,7 +326,6 @@ public class TomarPedido extends javax.swing.JFrame {
                 (datechooser.view.BackRenderer)null,
                 false,
                 true)));
-    chooserdate.setLocale(new java.util.Locale("es", "CL", ""));
 
     jLabel4.setText("FECHA DE DESPACHO");
 
@@ -337,12 +344,20 @@ public class TomarPedido extends javax.swing.JFrame {
             txtrutFocusLost(evt);
         }
     });
+    txtrut.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            txtrutMouseClicked(evt);
+        }
+    });
     txtrut.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             txtrutActionPerformed(evt);
         }
     });
     txtrut.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            txtrutKeyTyped(evt);
+        }
         public void keyPressed(java.awt.event.KeyEvent evt) {
             txtrutKeyPressed(evt);
         }
@@ -604,8 +619,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     txtfechahoy1.setText("USUARIO :");
 
-    txtcodigovendedor.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-    txtcodigovendedor.setInheritsPopupMenu(false);
+    txtcodven.setEditable(false);
 
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
     jPanel4.setLayout(jPanel4Layout);
@@ -614,8 +628,8 @@ public class TomarPedido extends javax.swing.JFrame {
         .addGroup(jPanel4Layout.createSequentialGroup()
             .addGap(257, 257, 257)
             .addComponent(txtfechahoy1)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(txtcodigovendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(txtcodven, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txtfechahoy, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(26, 26, 26)
@@ -638,8 +652,8 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addComponent(txtfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtfechahoy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtcodigovendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtfechahoy1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtfechahoy1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcodven, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(panelcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(10, 10, 10)
@@ -682,11 +696,33 @@ public class TomarPedido extends javax.swing.JFrame {
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void crear_modelo_tabla() {
+
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Subtotal");
+        this.tabla.setModel(modelo);
+
+    }
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        //limpiar los txt y la tabla
         limpiacliente();
+        Limpia_tabla();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Limpia_tabla() {
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i -= 1;
+        }
+    }
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //al hacer click en el boton
@@ -724,6 +760,9 @@ public class TomarPedido extends javax.swing.JFrame {
         txtcategoria.setText("");
         txtdireccion.setText("");
         txtcomuna.setText("");
+        txtneto.setText("");
+        txtiva.setText("");
+        txttotalpedido.setText("");
     }
 
     public void limpiatxt() {
@@ -863,8 +902,10 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcategoriaActionPerformed
 
     private void comboclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboclienteActionPerformed
-
-        String ven = txtcodigovendedor.getText();
+   
+    
+        
+        String ven = txtcodven.getText();
         String op = (String) combocliente.getSelectedItem();
 
         cx.obt_datoscliente(op, txtrut, txtrazonsocial, txtcategoria);
@@ -877,7 +918,7 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_comboclienteActionPerformed
 
     private void txtrutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtrutActionPerformed
-
+         
         // TODO add your handling code here:
     }//GEN-LAST:event_txtrutActionPerformed
 
@@ -938,6 +979,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     private void txtcodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcodigoFocusLost
         String cod = txtcodigo.getText();
+
         cx.obt_producto_por_cod(cod, txtproducto, txtvalor, txtcodigo);
 
     }//GEN-LAST:event_txtcodigoFocusLost
@@ -950,6 +992,51 @@ public class TomarPedido extends javax.swing.JFrame {
         String cod = txtcodigo.getText();
         cx.obt_producto_por_cod(cod, txtproducto, txtvalor, txtcodigo);        // TODO add your handling code here:
     }//GEN-LAST:event_txtcantidadFocusLost
+
+    private void txtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyTyped
+        //evento key type para decirle al textfiel que solo ingrese letras o numero o ambos
+
+        char car = evt.getKeyChar();
+
+        if (Character.isDigit(car)) {   // si agrego eso permito caracteres tambien>>>  Character.isLetter(car) ||
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
+
+    }//GEN-LAST:event_txtcodigoKeyTyped
+
+    private void txtcantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantidadKeyTyped
+
+        char car = evt.getKeyChar();
+
+        if (Character.isDigit(car)) {   // si agrego eso permito caracteres tambien>>>  Character.isLetter(car) ||
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtcantidadKeyTyped
+
+    private void txtrutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrutKeyTyped
+
+        char car = evt.getKeyChar();
+
+        if (Character.isDigit(car)) {   // si agrego eso permito caracteres tambien>>>  Character.isLetter(car) ||
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
+    }//GEN-LAST:event_txtrutKeyTyped
+
+    private void txtrutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtrutMouseClicked
+        
+        combocliente.setModel(cx.carga_cliente_combo(txtcodven.getText()));  
+        combocliente.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtrutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1030,7 +1117,7 @@ public class TomarPedido extends javax.swing.JFrame {
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcategoria;
     private javax.swing.JTextField txtcodigo;
-    public static javax.swing.JLabel txtcodigovendedor;
+    public static javax.swing.JTextField txtcodven;
     private javax.swing.JTextField txtcomuna;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JLabel txtfecha;
