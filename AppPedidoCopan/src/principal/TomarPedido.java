@@ -194,6 +194,9 @@ public class TomarPedido extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButton1KeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jButton1KeyReleased(evt);
+            }
         });
 
         jLabel6.setText("Código");
@@ -351,11 +354,11 @@ public class TomarPedido extends javax.swing.JFrame {
         }
     });
     txtrut.addKeyListener(new java.awt.event.KeyAdapter() {
-        public void keyPressed(java.awt.event.KeyEvent evt) {
-            txtrutKeyPressed(evt);
-        }
         public void keyTyped(java.awt.event.KeyEvent evt) {
             txtrutKeyTyped(evt);
+        }
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            txtrutKeyPressed(evt);
         }
     });
 
@@ -485,7 +488,6 @@ public class TomarPedido extends javax.swing.JFrame {
     );
 
     txtfecha.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-    txtfecha.setText("                      ");
 
     txtfechahoy.setText("FECHA DE HOY");
 
@@ -819,33 +821,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         //presionar boton con tecla enter
-        if (txtcodigo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
-            limpiatxt();
-        } else {
-            if (txtcantidad.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "campo cantidad Vacio");
-                limpiatxt();
-
-            } else {
-                if (txtvalor.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "campo valor Vacio");
-                    limpiatxt();
-                } else {
-                    String[] detalle = new String[5];
-                    detalle[0] = txtcodigo.getText();
-                    detalle[1] = txtproducto.getText();
-                    detalle[2] = txtcantidad.getText();
-                    detalle[3] = txtvalor.getText();
-                    detalle[4] = txtsubtotal.getText();
-                    modelo.addRow(detalle);
-                    limpiatxt();
-                }
-            }
-        }
-        comboproducto.setSelectedIndex(0);
-        calcula_total_neto();
-        calcula_iva_total();
+       
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1KeyPressed
 
@@ -1033,6 +1009,36 @@ public class TomarPedido extends javax.swing.JFrame {
         combocliente.setEnabled(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_txtrutMouseClicked
+
+    private void jButton1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyReleased
+ if (txtcodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "campo Codigo Vacio");
+            limpiatxt();
+        } else {
+            if (txtcantidad.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "campo cantidad Vacio");
+                limpiatxt();
+
+            } else {
+                if (txtvalor.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "campo valor Vacio");
+                    limpiatxt();
+                } else {
+                    String[] detalle = new String[5];
+                    detalle[0] = txtcodigo.getText();
+                    detalle[1] = txtproducto.getText();
+                    detalle[2] = txtcantidad.getText();
+                    detalle[3] = txtvalor.getText();
+                    detalle[4] = txtsubtotal.getText();
+                    modelo.addRow(detalle);
+                    limpiatxt();
+                }
+            }
+        }
+        comboproducto.setSelectedIndex(0);
+        calcula_total_neto();
+        calcula_iva_total();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyReleased
 
     /**
      * @param args the command line arguments

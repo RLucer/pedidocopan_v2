@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import principal.TomarPedido;
 import principal.Login;
-
+import principal.agenda;
 /**
  *
  * @author Girona 03
@@ -173,20 +173,27 @@ public class Vendedor extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         //debo ingresar que id del vendedor para mostrarlo en la siguente jframe
+       
+            TomarPedido venta;
         try {
-            TomarPedido venta = new TomarPedido();
-            venta.setVisible(true);
-            
+            venta = new TomarPedido();
+            venta.setVisible(true);      
             TomarPedido.txtcodven.setText(lblcodv.getText());
-           
-            // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Vendedor.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        agenda agendad = new agenda();
+        agendad.setVisible(true);
+        
+        
+        
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
