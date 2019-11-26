@@ -1,4 +1,3 @@
-
 package gestionBd;
 
 import java.sql.Connection;
@@ -8,12 +7,13 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class GestionIngreso {
+
     String bd = "pedido_2019";
     String login = "rlucero";
     String password = "Rls232408";
     String url = "jdbc:mysql://201.238.207.58/" + bd;
     Connection conn = null;
-    
+
     public GestionIngreso() throws ClassNotFoundException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -25,15 +25,14 @@ public class GestionIngreso {
             System.out.println("error  :  " + e.getMessage());
         }
     }
-    
-        
-     //------------------ METODO DE INGRESO ----------------------//
+
+    //------------------ METODO DE INGRESO ----------------------//
     public void ingreso(String sql) {
         //  ResultSet res = null;
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "DATOS INGRESADOS CON EXITO");
+            // JOptionPane.showMessageDialog(null, "DATOS INGRESADOS CON EXITO");
             pstm.close();
         } catch (SQLException e) {
             System.err.println("error : " + e.getMessage());
@@ -44,6 +43,24 @@ public class GestionIngreso {
     public void ingreso_categoria(String op) {
         String sql = "insert into categoria (categoria)values('" + op + "');";
         ingreso(sql);
+        JOptionPane.showMessageDialog(null, "Ingreso Correcto de Datos");
     }
+
     //------------------------------------------------------------------//
+    //insertar pedido//
+    public void ingreso_pedido(String fechapedido, String fechasalida, int monto, int idestadopedido, int iddireccion) {
+        String sql = "INSERT INTO `pedido_2019`.`pedido` (`fecha_ingreso`, `fecha_salida`, `monto`, `idestadopedido`, `iddireccion`) "
+                + "VALUES ('" + fechapedido + "', '" + fechasalida + "', '" + monto + "', '" + idestadopedido + "', '" + iddireccion + "');";
+        ingreso(sql);
+        JOptionPane.showMessageDialog(null, "Ingreso Correcto de Pedido Datos");
+    }
+
+    //insetar detalle pedido
+    
+    public void ingreso_detallepedido(int idproducto, int idpedido, int cantidad) {
+        String sql = "INSERT INTO `pedido_2019`.`detallepedido` (`idproducto`, `idpedido`, `cantidad`) VALUES ('"+idproducto+"', '"+idpedido+"', '"+cantidad+"');";
+        ingreso(sql);
+        JOptionPane.showMessageDialog(null, "Ingreso Correcto de Detalles Datos");
+    }
+    
 }

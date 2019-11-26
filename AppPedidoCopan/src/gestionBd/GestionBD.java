@@ -153,12 +153,13 @@ public class GestionBD {
         return null;
     }
 
-    public JTextField obt_direccion(String op, JTextField txtdireccion, JTextField txtcomuna) {
+    public JTextField obt_direccion(String op, JTextField txtdireccion, JTextField txtcomuna,JTextField txtcodsuc ) {
         ResultSet res = this.consulta("select * from direccion join comuna on direccion.idcomuna=comuna.idcomuna where direccion='" + op + "'");
         try {
             while (res.next()) {
                 txtdireccion.setText(res.getString("direccion"));
                 txtcomuna.setText(res.getString("comuna"));
+                txtcodsuc.setText(res.getString("iddireccion"));
             }
         } catch (SQLException ex) {
             System.out.println("consulta mala : " + ex.getMessage());
