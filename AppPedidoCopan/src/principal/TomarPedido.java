@@ -19,9 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import principal.Vendedor;
 import java.text.SimpleDateFormat;
-import static java.time.Instant.now;
 import java.util.Date;
 import gestionBd.GestionIngreso;
+
 
 /**
  *
@@ -29,7 +29,9 @@ import gestionBd.GestionIngreso;
  */
 public class TomarPedido extends javax.swing.JFrame {
 
-    GestionBD cx = new GestionBD();
+  GestionIngreso gbd ;
+   
+      GestionBD cx = new GestionBD();
     Login lo = new Login();
 
     public static String cod;
@@ -719,7 +721,6 @@ public class TomarPedido extends javax.swing.JFrame {
 
     }
 
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Iterable<Period> selection = chooserdate.getSelection();
 
@@ -732,37 +733,40 @@ public class TomarPedido extends javax.swing.JFrame {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
         String fechadespacho = formato.format(d);
         //--fecha de la toma del pedido con formato --//
-        Date now = new Date(System.currentTimeMillis()); 
+        Date now = new Date(System.currentTimeMillis());
         String fechahoy = formato.format(now);
-        
-        
+
+        int totalpedido = Integer.parseInt(txttotalpedido.getText());
+        int cods = Integer.parseInt(txtcodsuc.getText());
+        int estado = 3;
+
+        System.out.println("fecha hoy " + fechahoy);
+        System.out.println("fecha desp " + fechadespacho);
+        System.out.println("mont  " + totalpedido);
+        System.out.println("idestado " + estado);
+        System.out.println("id direccion " + cods);
+
+      try {
+          gbd = new GestionIngreso();
+          
+          
+             gbd.ingreso_pedido(fechahoy, fechadespacho, totalpedido, estado, cods);
+             
+             
+            //        int idproducto, int idpedido, int cantidad) 
+             
+             
+       
+      } catch (ClassNotFoundException ex) {
+          Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
+      }
+         //limpiar los txt y la tabla
+          //      limpiacliente();
+          //     Limpia_tabla();
+          // TODO add your handling code here:
       
-        
       
-       GestionIngreso gbd =GestionIngreso();
-        
-       int totalpedido = Integer.parseInt(txttotalpedido.getText());
-       int cods = Integer.parseInt(txtcodsuc.getText());
-        int estado =3;
-        
-        
-        System.out.println("fecha hoy "+fechahoy);
-        System.out.println("fecha desp "+fechadespacho);
-      System.out.println("mont  "+ totalpedido);
-       System.out.println("idestado "+estado);
-        System.out.println("id direccion "+cods);
-        
-        
-        gbd.ingreso_pedido(fechahoy, fechadespacho, totalpedido,estado,cods);
-        
-        
-        
-        
-        
-        //limpiar los txt y la tabla
-  //      limpiacliente();
-   //     Limpia_tabla();
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Limpia_tabla() {
@@ -1202,10 +1206,6 @@ public class TomarPedido extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private GestionBD GestionBD() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private GestionIngreso GestionIngreso() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

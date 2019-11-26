@@ -31,6 +31,7 @@ public class GestionIngreso {
         //  ResultSet res = null;
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
+            
             pstm.executeUpdate();
             // JOptionPane.showMessageDialog(null, "DATOS INGRESADOS CON EXITO");
             pstm.close();
@@ -52,6 +53,7 @@ public class GestionIngreso {
         String sql = "INSERT INTO `pedido_2019`.`pedido` (`fecha_ingreso`, `fecha_salida`, `monto`, `idestadopedido`, `iddireccion`) "
                 + "VALUES ('" + fechapedido + "', '" + fechasalida + "', '" + monto + "', '" + idestadopedido + "', '" + iddireccion + "');";
         ingreso(sql);
+        
         JOptionPane.showMessageDialog(null, "Ingreso Correcto de Pedido Datos");
     }
 
