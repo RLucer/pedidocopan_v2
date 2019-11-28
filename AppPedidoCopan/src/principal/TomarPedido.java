@@ -22,16 +22,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import gestionBd.GestionIngreso;
 
-
 /**
  *
  * @author Girona 03
  */
 public class TomarPedido extends javax.swing.JFrame {
 
-  GestionIngreso gbd ;
-   
-      GestionBD cx = new GestionBD();
+    //variable que trae el nuemro de pedido ingresado en la base de datos
+    public static int numeroPedido;
+
+    public static int getNumeroPedido() {
+        return numeroPedido;
+    }
+
+    public static void setNumeroPedido(int numeroPedido) {
+        TomarPedido.numeroPedido = numeroPedido;
+    }
+     
+    
+    
+    GestionIngreso gbd;
+
+    GestionBD cx = new GestionBD();
     Login lo = new Login();
 
     public static String cod;
@@ -746,27 +758,37 @@ public class TomarPedido extends javax.swing.JFrame {
         System.out.println("idestado " + estado);
         System.out.println("id direccion " + cods);
 
-      try {
-          gbd = new GestionIngreso();
-          
-          
-             gbd.ingreso_pedido(fechahoy, fechadespacho, totalpedido, estado, cods);
+        try {
+            gbd = new GestionIngreso();
+
+            gbd.ingreso_pedido_devo(fechahoy, fechadespacho, totalpedido, estado, cods);
+            
+            
+            
+            
+            
+            // ojo aca los datos deben salir de la tabla...
+                 for (int i = 0; i < tabla.getRowCount() ; i++) {
+                     
              
-             
-            //        int idproducto, int idpedido, int cantidad) 
-             
-             
-       
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
-      }
-         //limpiar los txt y la tabla
-          //      limpiacliente();
-          //     Limpia_tabla();
-          // TODO add your handling code here:
-      
-      
-      
+                     
+                     gbd.ingreso_detallepedido((int) tabla.getValueAt(i,0),numeroPedido,(int) tabla.getValueAt(i,2) );
+                     
+            }
+           
+           //gbd.ingreso_detallepedido(idproducto, idpedido,cantidad);
+            
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //limpiar los txt y la tabla
+        //      limpiacliente();
+        //     Limpia_tabla();
+        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Limpia_tabla() {

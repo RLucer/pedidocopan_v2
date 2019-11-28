@@ -179,6 +179,7 @@ public class Vendedor extends javax.swing.JFrame {
             venta = new TomarPedido();
             venta.setVisible(true);      
             TomarPedido.txtcodven.setText(lblcodv.getText());
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Vendedor.class.getName()).log(Level.SEVERE, null, ex);
         }
