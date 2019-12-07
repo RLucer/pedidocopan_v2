@@ -21,6 +21,8 @@ import principal.Vendedor;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import gestionBd.GestionIngreso;
+import java.text.DecimalFormat;
+import javax.swing.JFormattedTextField;
 
 /**
  *
@@ -30,6 +32,7 @@ public class TomarPedido extends javax.swing.JFrame {
 
     //variable que trae el nuemro de pedido ingresado en la base de datos
     public static int numeroPedido;
+    public static int iddetallepedido;
 
     public static int getNumeroPedido() {
         return numeroPedido;
@@ -38,9 +41,15 @@ public class TomarPedido extends javax.swing.JFrame {
     public static void setNumeroPedido(int numeroPedido) {
         TomarPedido.numeroPedido = numeroPedido;
     }
-     
-    
-    
+
+    public static int getIddetallepedido() {
+        return iddetallepedido;
+    }
+
+    public static void setIddetallepedido(int iddetallepedido) {
+        TomarPedido.iddetallepedido = iddetallepedido;
+    }
+
     GestionIngreso gbd;
 
     GestionBD cx = new GestionBD();
@@ -417,6 +426,8 @@ public class TomarPedido extends javax.swing.JFrame {
 
     jLabel12.setText("Ej: 11222333K");
 
+    txtcodsuc.setEditable(false);
+
     jLabel19.setText("Cod Suc");
 
     javax.swing.GroupLayout panelclienteLayout = new javax.swing.GroupLayout(panelcliente);
@@ -564,6 +575,9 @@ public class TomarPedido extends javax.swing.JFrame {
 
     txtneto.setEditable(false);
     txtneto.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            txtnetoFocusGained(evt);
+        }
         public void focusLost(java.awt.event.FocusEvent evt) {
             txtnetoFocusLost(evt);
         }
@@ -577,6 +591,12 @@ public class TomarPedido extends javax.swing.JFrame {
     txtiva.setEditable(false);
 
     txttotalpedido.setEditable(false);
+    txttotalpedido.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+    txttotalpedido.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            txttotalpedidoActionPerformed(evt);
+        }
+    });
 
     jButton3.setText("Eliminar");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -603,23 +623,24 @@ public class TomarPedido extends javax.swing.JFrame {
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17)
                         .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel17)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel14)
-                                        .addComponent(jLabel16))))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txttotalpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                .addComponent(txtneto)
-                                .addComponent(txtiva)))))
+                                .addComponent(jLabel14)
+                                .addComponent(jLabel16))))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txttotalpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                        .addComponent(txtneto)
+                        .addComponent(txtiva)))
                 .addComponent(jScrollPane1))
             .addGap(10, 10, 10))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
     );
     jPanel5Layout.setVerticalGroup(
         jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,14 +659,18 @@ public class TomarPedido extends javax.swing.JFrame {
                 .addComponent(txtiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel17)
-                .addComponent(txttotalpedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addComponent(jLabel17)
+                    .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(txttotalpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+            .addGap(18, 18, 18)
             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(10, 10, 10))
+            .addContainerGap())
     );
 
     txtfechahoy1.setText("USUARIO :");
+
+    txtcodven.setEditable(false);
 
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
     jPanel4.setLayout(jPanel4Layout);
@@ -684,8 +709,9 @@ public class TomarPedido extends javax.swing.JFrame {
             .addComponent(panelcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(10, 10, 10)
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(10, 10, 10)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
     );
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -717,7 +743,7 @@ public class TomarPedido extends javax.swing.JFrame {
         .addGroup(layout.createSequentialGroup()
             .addGap(8, 8, 8)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(8, 8, 8))
+            .addGap(32, 32, 32))
     );
 
     pack();
@@ -762,30 +788,25 @@ public class TomarPedido extends javax.swing.JFrame {
             gbd = new GestionIngreso();
 
             gbd.ingreso_pedido_devo(fechahoy, fechadespacho, totalpedido, estado, cods);
-            
-            
-            
-            
-            
+
             // ojo aca los datos deben salir de la tabla...
-                 for (int i = 0; i < tabla.getRowCount() ; i++) {
-                     
-             
-                     
-                     gbd.ingreso_detallepedido((int) tabla.getValueAt(i,0),numeroPedido,(int) tabla.getValueAt(i,2) );
-                     
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+
+                int xx = Integer.parseInt(tabla.getValueAt(i, 0).toString());
+                int xxx = Integer.parseInt(tabla.getValueAt(i, 2).toString());
+
+                //    int cant = (int) tabla.getValueAt(0,2);
+                gbd.ingreso_detallepedido(xx, iddetallepedido, xxx);
+
             }
-           
-           //gbd.ingreso_detallepedido(idproducto, idpedido,cantidad);
-            
-            
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
         //limpiar los txt y la tabla
-        //      limpiacliente();
-        //     Limpia_tabla();
+        limpiacliente();
+        limpiatxt();
+        Limpia_tabla();
         // TODO add your handling code here:
 
 
@@ -938,9 +959,12 @@ public class TomarPedido extends javax.swing.JFrame {
     }
 
     private void calcula_iva_total() {
+        
+        
         int net = Integer.parseInt(txtneto.getText());
         int iva = net * 19 / 100;
         int tot = net + iva;
+    
         txtiva.setText(Integer.toString(iva));
         txttotalpedido.setText(Integer.toString(tot));
     }
@@ -974,7 +998,7 @@ public class TomarPedido extends javax.swing.JFrame {
 //
         String rut = txtrut.getText();
 
-        combosucursal.setModel(cx.carga_sucursales_combo(rut));
+        combosucursal.setModel(cx.carga_sucursales_combo(rut, ven));
 
         // TODO add your handling code here:
     }//GEN-LAST:event_comboclienteActionPerformed
@@ -985,9 +1009,10 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtrutActionPerformed
 
     private void txtrutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtrutFocusLost
+        String ven = txtcodven.getText();
         String rut = txtrut.getText();
         cx.obt_datoscliente_por_rut(rut, txtrazonsocial, txtcategoria, txtrut);
-        combosucursal.setModel(cx.carga_sucursales_combo(rut));
+        combosucursal.setModel(cx.carga_sucursales_combo(rut, ven));
 
         // TODO add your handling code here:
     }//GEN-LAST:event_txtrutFocusLost
@@ -1021,6 +1046,8 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnetoActionPerformed
 
     private void txtnetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnetoFocusLost
+       
+        
         calcula_total_neto();
 
         // TODO add your handling code here:
@@ -1028,10 +1055,10 @@ public class TomarPedido extends javax.swing.JFrame {
 
     private void jButton3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton3KeyPressed
 
-        modelo.removeRow(tabla.getSelectedRow());
-        calcula_total_neto();
-        calcula_iva_total();
-
+      //  modelo.removeRow(tabla.getSelectedRow());
+      //  calcula_total_neto();
+      //  calcula_iva_total();
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3KeyPressed
 
@@ -1129,6 +1156,14 @@ public class TomarPedido extends javax.swing.JFrame {
         calcula_total_neto();
         calcula_iva_total();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1KeyReleased
+
+    private void txttotalpedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalpedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttotalpedidoActionPerformed
+
+    private void txtnetoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnetoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnetoFocusGained
 
     /**
      * @param args the command line arguments

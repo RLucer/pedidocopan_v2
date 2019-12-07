@@ -69,6 +69,7 @@ public class GestionIngreso {
             if (generatedKeys.next()) {
                 idGenerado = generatedKeys.getInt(1);
                  TomarPedido.setNumeroPedido(idGenerado);
+                 TomarPedido.setIddetallepedido(idGenerado);
             }
             // JOptionPane.showMessageDialog(null, "DATOS INGRESADOS CON EXITO");
             pstm.close();
@@ -77,6 +78,8 @@ public class GestionIngreso {
         }
 
         System.out.println("idgenerado  " + idGenerado);
+        
+        
        
     }
 
@@ -85,14 +88,14 @@ public class GestionIngreso {
                 + "VALUES ('" + fechapedido + "', '" + fechasalida + "', '" + monto + "', '" + idestadopedido + "', '" + iddireccion + "');";
         ingreso_pedido_con_devolucion_ID(sql);
 
-        JOptionPane.showMessageDialog(null, "Ingreso Correcto de Pedido Datos");
-    }
+        JOptionPane.showMessageDialog(null, "FOLIO DE PEDIDO : "+idGenerado );
+    }  
 
     //insetar detalle pedido
     public void ingreso_detallepedido(int idproducto, int idpedido, int cantidad) {
         String sql = "INSERT INTO `pedido_2019`.`detallepedido` (`idproducto`, `idpedido`, `cantidad`) VALUES ('" + idproducto + "', '" + idpedido + "', '" + cantidad + "');";
         ingreso(sql);
-        JOptionPane.showMessageDialog(null, "Ingreso Correcto de Detalles Datos");
+      
     }
 
 }

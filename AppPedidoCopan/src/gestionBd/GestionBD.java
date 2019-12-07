@@ -103,10 +103,16 @@ public class GestionBD {
         return ListaModelo;
     }
 
-    public DefaultComboBoxModel carga_sucursales_combo(String rut) {
+    public DefaultComboBoxModel carga_sucursales_combo(String rut, String ven) {
         DefaultComboBoxModel ListaModelo = new DefaultComboBoxModel();
         ListaModelo.addElement("Seleccione una Sucursal");
-        ResultSet res = this.consulta("select * from direccion join cliente on direccion.idrut=cliente.idrut  where cliente.idrut='" + rut + "'");
+        ResultSet res = this.consulta(" select direccion\n" +
+" from direccion\n" +
+" join cliente \n" +
+" on cliente.idrut=direccion.idrut \n" +
+" join usuario \n" +
+" on direccion.idusuario=usuario.idusuario \n" +
+" where cliente.idrut='"+rut+"' and  usuario.idusuario='"+ven+"'");
         try {
             while (res.next()) {
                 ListaModelo.addElement(res.getString("direccion"));
