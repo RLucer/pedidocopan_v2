@@ -8,8 +8,7 @@ package principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import principal.TomarPedido;
-import principal.Login;
-import principal.agenda;
+
 /**
  *
  * @author Girona 03

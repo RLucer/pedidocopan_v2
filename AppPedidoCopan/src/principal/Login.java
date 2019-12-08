@@ -9,9 +9,6 @@ import gestionBd.GestionBD;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import principal.Principal;
-import principal.TomarPedido;
-import principal.Vendedor;
 
 /**
  *
