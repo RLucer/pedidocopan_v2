@@ -174,6 +174,27 @@ public class TomarPedido extends javax.swing.JFrame {
         txtproducto.setEditable(false);
 
         txtvalor.setEditable(false);
+        txtvalor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtvalorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtvalorFocusLost(evt);
+            }
+        });
+        txtvalor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtvalorActionPerformed(evt);
+            }
+        });
+        txtvalor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtvalorKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtvalorKeyReleased(evt);
+            }
+        });
 
         txtcantidad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -742,8 +763,7 @@ public class TomarPedido extends javax.swing.JFrame {
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
             .addGap(8, 8, 8)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(32, 32, 32))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
@@ -1078,7 +1098,8 @@ public class TomarPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcodigoKeyPressed
 
     private void txtcantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcantidadFocusLost
-        String cod = txtcodigo.getText();
+        String cod = txtcodigo.getText();// añadir que segun categoria del cliente que devuelva precio de distribuidor o precio lista
+        
         cx.obt_producto_por_cod(cod, txtproducto, txtvalor, txtcodigo);        // TODO add your handling code here:
     }//GEN-LAST:event_txtcantidadFocusLost
 
@@ -1164,6 +1185,26 @@ public class TomarPedido extends javax.swing.JFrame {
     private void txtnetoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtnetoFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnetoFocusGained
+
+    private void txtvalorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalorActionPerformed
+
+    private void txtvalorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtvalorFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalorFocusLost
+
+    private void txtvalorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtvalorFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalorFocusGained
+
+    private void txtvalorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalorKeyTyped
+
+    private void txtvalorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtvalorKeyReleased
 
     /**
      * @param args the command line arguments

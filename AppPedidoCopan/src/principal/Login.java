@@ -43,7 +43,7 @@ public class Login extends javax.swing.JFrame {
         txtpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LOGIN                                                           ");
+        setTitle("LOGIN                                                              By RLS.                                           ");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -136,6 +136,10 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleDescription("");
+
+        getAccessibleContext().setAccessibleName("                          ");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,6 +172,7 @@ public class Login extends javax.swing.JFrame {
                             Vendedor v = new Vendedor();
                             v.setVisible(true);
                            //  envio al frame que quiero una variable a un jtextfield q se encuentra en otro frame 
+                          
                            Vendedor.lblnombreapellido.setText(datos[0]+" "+datos[4]);
                            Vendedor.lblcodv.setText(datos[3]);
                                    

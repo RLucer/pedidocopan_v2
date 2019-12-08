@@ -191,7 +191,7 @@ public class Vendedor extends javax.swing.JFrame {
 
         agenda agendad = new agenda();
         agendad.setVisible(true);
-        
+        agenda.txtcodvenagenda.setText(lblcodv.getText());
         
         
         
