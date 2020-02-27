@@ -12,10 +12,10 @@ import principal.TomarPedido;
 
 public class GestionIngreso {
 
-    String bd = "pedido_2019";
-    String login = "rlucero";
-    String password = "Rls232408";
-    String url = "jdbc:mysql://201.238.207.58/" + bd;
+  String bd = "gironacl_rlcompras";
+    String login = "gironacl_root";
+    String password = "Rls232408**8184";
+    String url = "jdbc:mysql://201.148.105.97/" + bd;
     Connection conn = null;
 
     public GestionIngreso() throws ClassNotFoundException {
@@ -68,7 +68,7 @@ public class GestionIngreso {
             ResultSet generatedKeys = pstm.getGeneratedKeys();
             if (generatedKeys.next()) {
                 idGenerado = generatedKeys.getInt(1);
-                 TomarPedido.setNumeroPedido(idGenerado);
+              //   TomarPedido.setNumeroPedido(idGenerado);
                  TomarPedido.setIddetallepedido(idGenerado);
             }
             // JOptionPane.showMessageDialog(null, "DATOS INGRESADOS CON EXITO");
@@ -77,7 +77,7 @@ public class GestionIngreso {
             System.err.println("error : " + e.getMessage());
         }
 
-        System.out.println("idgenerado  " + idGenerado);
+   //     System.out.println("idgenerado  " + idGenerado);
         
         
        

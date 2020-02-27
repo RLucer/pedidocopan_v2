@@ -134,7 +134,7 @@ public class TomarPedido extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        butonSalir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -143,6 +143,7 @@ public class TomarPedido extends javax.swing.JFrame {
         txttotalpedido = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        botonAceptar = new javax.swing.JButton();
         txtfechahoy1 = new javax.swing.JLabel();
         txtcodven = new javax.swing.JTextField();
 
@@ -337,38 +338,38 @@ public class TomarPedido extends javax.swing.JFrame {
 
         chooserdate.setCurrentView(new datechooser.view.appearance.AppearancesList("Grey",
             new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(222, 222, 222),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(222, 222, 222),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 255),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(128, 128, 128),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(222, 222, 222),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
-                    new java.awt.Color(222, 222, 222),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
+                    new java.awt.Color(0, 0, 0),
                     new java.awt.Color(255, 0, 0),
                     false,
                     false,
@@ -581,10 +582,10 @@ public class TomarPedido extends javax.swing.JFrame {
     });
     jScrollPane1.setViewportView(tabla);
 
-    jButton2.setText("ACEPTAR");
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
+    butonSalir.setText("SALIR");
+    butonSalir.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton2ActionPerformed(evt);
+            butonSalirActionPerformed(evt);
         }
     });
 
@@ -633,6 +634,21 @@ public class TomarPedido extends javax.swing.JFrame {
 
     jLabel18.setText("Si desea eliminar algun producto solicitado marque la fila y presione el boton  ");
 
+    botonAceptar.setText("ACEPTAR");
+    botonAceptar.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            botonAceptarFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            botonAceptarFocusLost(evt);
+        }
+    });
+    botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            botonAceptarActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
     jPanel5.setLayout(jPanel5Layout);
     jPanel5Layout.setHorizontalGroup(
@@ -660,7 +676,9 @@ public class TomarPedido extends javax.swing.JFrame {
             .addGap(10, 10, 10))
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(butonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(48, 48, 48)
+            .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap())
     );
     jPanel5Layout.setVerticalGroup(
@@ -684,9 +702,11 @@ public class TomarPedido extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addGap(0, 0, Short.MAX_VALUE))
                 .addComponent(txttotalpedido, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-            .addGap(18, 18, 18)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap())
+            .addGap(8, 8, 8)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(butonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(21, 21, 21))
     );
 
     txtfechahoy1.setText("USUARIO :");
@@ -779,58 +799,10 @@ public class TomarPedido extends javax.swing.JFrame {
 
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void butonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butonSalirActionPerformed
         //Iterable<Period> selection = chooserdate.getSelection();
-
-        //--- creo una variable de la clase calendar y recibo desde el calendario la fecha que se encuentra seleccionada
-        //--- luego creo una variable de tipo Date  y a esta le paso lo que tiene mi variable tipo calendar con el .getTime()
-        //--- ahora le damos formato a la variable tipo date creada dejandola como string con el formato para el sql
-        //--fecha de despacho programado--//
-        Calendar fechadsp = chooserdate.getSelectedDate();
-        Date d = fechadsp.getTime();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-        String fechadespacho = formato.format(d);
-        //--fecha de la toma del pedido con formato --//
-        Date now = new Date(System.currentTimeMillis());
-        String fechahoy = formato.format(now);
-
-        int totalpedido = Integer.parseInt(txttotalpedido.getText());
-        int cods = Integer.parseInt(txtcodsuc.getText());
-        int estado = 3;
-
-        System.out.println("fecha hoy " + fechahoy);
-        System.out.println("fecha desp " + fechadespacho);
-        System.out.println("mont  " + totalpedido);
-        System.out.println("idestado " + estado);
-        System.out.println("id direccion " + cods);
-
-        try {
-            gbd = new GestionIngreso();
-
-            gbd.ingreso_pedido_devo(fechahoy, fechadespacho, totalpedido, estado, cods);
-
-            // ojo aca los datos deben salir de la tabla...
-            for (int i = 0; i < tabla.getRowCount(); i++) {
-
-                int xx = Integer.parseInt(tabla.getValueAt(i, 0).toString());
-                int xxx = Integer.parseInt(tabla.getValueAt(i, 2).toString());
-
-                //    int cant = (int) tabla.getValueAt(0,2);
-                gbd.ingreso_detallepedido(xx, iddetallepedido, xxx);
-
-            }
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //limpiar los txt y la tabla
-        limpiacliente();
-        limpiatxt();
-        Limpia_tabla();
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+            this.dispose();
+    }//GEN-LAST:event_butonSalirActionPerformed
 
     private void Limpia_tabla() {
         for (int i = 0; i < tabla.getRowCount(); i++) {
@@ -1206,6 +1178,68 @@ public class TomarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtvalorKeyReleased
 
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+ //Iterable<Period> selection = chooserdate.getSelection();
+
+        //--- creo una variable de la clase calendar y recibo desde el calendario la fecha que se encuentra seleccionada
+        //--- luego creo una variable de tipo Date  y a esta le paso lo que tiene mi variable tipo calendar con el .getTime()
+        //--- ahora le damos formato a la variable tipo date creada dejandola como string con el formato para el sql
+        //--fecha de despacho programado--//
+        Calendar fechadsp = chooserdate.getSelectedDate();
+        Date d = fechadsp.getTime();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+        String fechadespacho = formato.format(d);
+        //--fecha de la toma del pedido con formato --//
+        Date now = new Date(System.currentTimeMillis());
+        String fechahoy = formato.format(now);
+
+        int totalpedido = Integer.parseInt(txttotalpedido.getText());
+        int cods = Integer.parseInt(txtcodsuc.getText());
+        int estado = 1;
+
+        System.out.println("fecha hoy " + fechahoy);
+        System.out.println("fecha desp " + fechadespacho);
+        System.out.println("mont  " + totalpedido);
+        System.out.println("idestado " + estado);
+        System.out.println("id direccion " + cods);
+
+        try {
+            gbd = new GestionIngreso();
+
+            gbd.ingreso_pedido_devo(fechahoy, fechadespacho, totalpedido, estado, cods);
+
+            // ojo aca los datos deben salir de la tabla...
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+
+                int xx = Integer.parseInt(tabla.getValueAt(i, 0).toString());
+                int xxx = Integer.parseInt(tabla.getValueAt(i, 2).toString());
+
+                //    int cant = (int) tabla.getValueAt(0,2);
+                gbd.ingreso_detallepedido(xx, iddetallepedido, xxx);
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TomarPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //limpiar los txt y la tabla
+        limpiacliente();
+        limpiatxt();
+        Limpia_tabla();
+        // TODO add your handling code here:
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void botonAceptarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_botonAceptarFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAceptarFocusLost
+
+    private void botonAceptarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_botonAceptarFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAceptarFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -1247,13 +1281,14 @@ public class TomarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton butonSalir;
     private javax.swing.ButtonGroup buttonGroup1;
     private datechooser.beans.DateChooserCombo chooserdate;
     private javax.swing.JComboBox<String> combocliente;
     private javax.swing.JComboBox<String> comboproducto;
     private javax.swing.JComboBox<String> combosucursal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

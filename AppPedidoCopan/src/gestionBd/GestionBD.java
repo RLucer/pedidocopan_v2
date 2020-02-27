@@ -20,10 +20,10 @@ import javax.swing.JTextField;
  */
 public class GestionBD {
 
-    String bd = "pedido_2019";
-    String login = "rlucero";
-    String password = "Rls232408";
-    String url = "jdbc:mysql://201.238.207.58/" + bd;
+    String bd = "gironacl_rlcompras";
+    String login = "gironacl_root";
+    String password = "Rls232408**8184";
+    String url = "jdbc:mysql://201.148.105.97/" + bd;
     Connection conn = null;
 
     public GestionBD() throws ClassNotFoundException {

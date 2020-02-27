@@ -6,6 +6,7 @@
 package principal;
 
 import gestionBd.GestionBD;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -145,6 +146,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuarioActionPerformed
 
     public void logg() {
+ 
         GestionBD rl = null;
         try {
             rl = new GestionBD();
@@ -154,14 +156,15 @@ public class Login extends javax.swing.JFrame {
         String usu = txtusuario.getText();
         String x = rl.LOGUEAR(usu);                 //me devuelve el usuario y la contraseña en un string llamado x
         String datos[] = x.split(",");
-        int admn = 4;
-        int venn = 3;
-
+      //  int admn = 4;
+     //   int venn = 3;
+          String valorPass = new String(txtpassword.getPassword());
         if (txtusuario.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese nombre usuario");
         } else {
             if (datos[0].equals(txtusuario.getText())) {
-                if (txtpassword.getText().equals(datos[1])) {
+                                              
+                if (valorPass.equals(datos[1])) {
 
                     int op = Integer.parseInt(datos[2]);
                     switch (op) {
@@ -187,6 +190,7 @@ public class Login extends javax.swing.JFrame {
                         // code block
                     }
                 } else {
+                    System.out.println("cont"+txtpassword.getPassword());
                     JOptionPane.showMessageDialog(null, "Acceso denegado:\n"
                             + "Por favor ingrese contraseña correcta", "Acceso denegado",
                             JOptionPane.ERROR_MESSAGE);
