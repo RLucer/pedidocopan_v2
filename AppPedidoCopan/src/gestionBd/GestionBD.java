@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  * @author Girona 03
  */
 public class GestionBD {
-
+//prueba
     String bd = "gironacl_rlcompras";
     String login = "gironacl_root";
     String password = "Rls232408**8184";
