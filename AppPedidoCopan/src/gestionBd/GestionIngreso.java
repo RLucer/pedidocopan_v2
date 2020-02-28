@@ -84,7 +84,7 @@ public class GestionIngreso {
     }
 
     public void ingreso_pedido_devo(String fechapedido, String fechasalida, int monto, int idestadopedido, int iddireccion) {
-        String sql = "INSERT INTO `pedido_2019`.`pedido` (`fecha_ingreso`, `fecha_salida`, `monto`, `idestadopedido`, `iddireccion`) "
+        String sql = "INSERT INTO `gironacl_rlcompras`.`pedido` (`fecha_ingreso`, `fecha_salida`, `monto`, `idestadopedido`, `iddireccion`) "
                 + "VALUES ('" + fechapedido + "', '" + fechasalida + "', '" + monto + "', '" + idestadopedido + "', '" + iddireccion + "');";
         ingreso_pedido_con_devolucion_ID(sql);
 
@@ -93,7 +93,7 @@ public class GestionIngreso {
 
     //insetar detalle pedido
     public void ingreso_detallepedido(int idproducto, int idpedido, int cantidad) {
-        String sql = "INSERT INTO `pedido_2019`.`detallepedido` (`idproducto`, `idpedido`, `cantidad`) VALUES ('" + idproducto + "', '" + idpedido + "', '" + cantidad + "');";
+        String sql = "INSERT INTO `gironacl_rlcompras`.`detallepedido` (`idproducto`, `idpedido`, `cantidad`) VALUES ('" + idproducto + "', '" + idpedido + "', '" + cantidad + "');";
         ingreso(sql);
       
     }
