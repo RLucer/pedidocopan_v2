@@ -146,7 +146,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuarioActionPerformed
 
     public void logg() {
- 
+
         GestionBD rl = null;
         try {
             rl = new GestionBD();
@@ -156,32 +156,30 @@ public class Login extends javax.swing.JFrame {
         String usu = txtusuario.getText();
         String x = rl.LOGUEAR(usu);                 //me devuelve el usuario y la contraseña en un string llamado x
         String datos[] = x.split(",");
-      //  int admn = 4;
-     //   int venn = 3;
-          String valorPass = new String(txtpassword.getPassword());
+        //  int admn = 4;
+        //   int venn = 3;
+        String valorPass = new String(txtpassword.getPassword());
         if (txtusuario.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese nombre usuario");
         } else {
             if (datos[0].equals(txtusuario.getText())) {
-                                              
+
                 if (valorPass.equals(datos[1])) {
 
                     int op = Integer.parseInt(datos[2]);
                     switch (op) {
-                        case 3:
+                        case 1:
                             Vendedor v = new Vendedor();
                             v.setVisible(true);
-                           //  envio al frame que quiero una variable a un jtextfield q se encuentra en otro frame 
-                          
-                           Vendedor.lblnombreapellido.setText(datos[0]+" "+datos[4]);
-                           Vendedor.lblcodv.setText(datos[3]);
-                                   
-                           
-                             
+                            //  envio al frame que quiero una variable a un jtextfield q se encuentra en otro frame 
+
+                            Vendedor.lblnombreapellido.setText(datos[0] + " " + datos[4]);
+                            Vendedor.lblcodv.setText(datos[3]);
+
                             dispose();
 
                             break;
-                        case 4:
+                        case 3:
                             Principal p = new Principal();
                             p.setVisible(true);
                             dispose();
@@ -190,7 +188,7 @@ public class Login extends javax.swing.JFrame {
                         // code block
                     }
                 } else {
-                    System.out.println("cont"+txtpassword.getPassword());
+                    System.out.println("cont" + txtpassword.getPassword());
                     JOptionPane.showMessageDialog(null, "Acceso denegado:\n"
                             + "Por favor ingrese contraseña correcta", "Acceso denegado",
                             JOptionPane.ERROR_MESSAGE);
@@ -213,7 +211,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btningresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btningresarKeyPressed
 
-          logg();
+        logg();
         // TODO add your handling code here:
     }//GEN-LAST:event_btningresarKeyPressed
 
