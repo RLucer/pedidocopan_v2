@@ -158,6 +158,8 @@ public class Login extends javax.swing.JFrame {
         String datos[] = x.split(",");
         //  int admn = 4;
         //   int venn = 3;
+   
+        
         String valorPass = new String(txtpassword.getPassword());
         if (txtusuario.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Ingrese nombre usuario");
